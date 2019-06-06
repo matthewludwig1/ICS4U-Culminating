@@ -26,7 +26,7 @@ public class Rocket extends Physics {
          double spdz, double ms) throws FileNotFoundException{   // default (instantiated on run-time)
         super(x,y,z,spdx,spdy,spdz,ms);  
         firing = false;
-        angle = new double[]{0,0,0}; //x rot = pitch, yrot = yaw, zrot = spin in that order
+        angle = new double[]{0,0,0}; //x rot = "pitch", yrot = "yaw", zrot = "spin" in that order
         commandsIn = new FileReader("Command.txt");
     }
 
