@@ -22,8 +22,7 @@ public class Physics {
         spacialPositions[1] = y;   // y dimension
         spacialPositions[2] = z;   // z dimension
         mass = ms;
-        velocity.set(spdx, spdy, spdz);
-         
+        velocity.set(spdx, spdy, spdz); 
     }
     
     /**
@@ -62,7 +61,7 @@ public class Physics {
         useTheForce();  
        
     }
-    public void addForce(Vector vec){
+    public void addForce(Vector vec){  // adding any/all forces
         for (int i =1; i<forces.length; i++){
             if(forces[i]== null){
                 forces[i] = vec;
@@ -71,7 +70,7 @@ public class Physics {
     }
     
     public void useTheForce(){  // each measure of velocity will be changed based on the acceleration
-        for (int i = 0; i < forces.length; i++) {
+        for (int i = 0; i < forces.length; i++) { // no enhanced loop, java
             if(forces[i] != null) {
                 velocity = new Vector(velocity.x()+ forces[i].x() / mass, 
                         velocity.y() + forces[i].y()/ mass,

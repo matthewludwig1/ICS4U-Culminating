@@ -20,14 +20,16 @@ public class Rocket extends Physics {
     FileReader commandsIn;
     boolean firing;
     double angle[];
+    int forceOfEngine = 0;
+
     Rocket(double x, double y, double z, double spdx, double spdy, 
-            double spdz, double ms) throws FileNotFoundException{   // default (instantiated on run-time)
+         double spdz, double ms) throws FileNotFoundException{   // default (instantiated on run-time)
         super(x,y,z,spdx,spdy,spdz,ms);  
         firing = false;
-        angle = new double[]{0,0}; //x rot = pitch, yrot = yaw, zrot = spin in that order
+        angle = new double[]{0,0,0}; //x rot = pitch, yrot = yaw, zrot = spin in that order
         commandsIn = new FileReader("Command.txt");
     }
-    
+
     public String readCommand(){
         Scanner sc = new Scanner(commandsIn);
         return sc.nextLine();
@@ -62,18 +64,25 @@ public class Rocket extends Physics {
        angle[0] += rot;
     }
     
-    private void fire() { // adding a force to the vector
+    private void fire() { // adding rocket force
         firing = true;
-        int forceOfEngine = 30;
+        forceOfEngine +=30;
         // gets dimensional components of applied force vector
-        double y = forceOfEngine*Math.sin(Math.toRadians(angle[0]));  // or forceVector* sin (angle z) * sin angle y to x
-        double x = forceOfEngine*Math.sin(Math.toRadians(angle[1]));  
-       // Vector v = new Vector(); might need to declare a new vector
-        double z = forceOfEngine*Math.cos(Math.toRadians(angle[2]));  // 3rd dimension might not be implemented
+        double y = forceOfEngine*Math.sin(Math.toRadians(angle[0])); //incorrect, will change
+        double x = forceOfEngine*Math.sin(Math.toRadians(angle[1])); // - to euler angles
+        double z = forceOfEngine*Math.cos(Math.toRadians(angle[2])); 
+        
+        Vector vec = new Vector(x,y,z); // declares new vector
+        forces[0] = vec; // adds Vector vec to slot 1 of Vector array (in Physics class)
     }
 
-    private void cont(double rot) {
-       
+    private void cont(double turns) { // continue on  
+       forceOfEngine += 0;
+       yaw(0);  // stays in place (y -direction)
+       pitch(0); // stays in place (x -direction)
+       for(int i = 0; i < turns; i++) {
+           cont(i);
+       }
     }
 
     private void cut() {

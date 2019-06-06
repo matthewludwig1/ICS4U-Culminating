@@ -18,12 +18,11 @@ public class RelativeMotion {
         
         /* Potential Criteria:
            - Read commands from text file, which creates a more interactive simulation 
-           - Allow user to vector objects, enter velocities, and compare their relative velocity's (on an x,y,z plane)
+           - Allow user to create rocket(with vectors)objects, enter velocities,masses
+             and compare their relative velocity's (on an x,y,z plane)
            - could have an interactive guide, or a tutorial on how to use program
-            ~ code to queue graphics on run time 
-        */ 
-        // launch frame
-          
+           ~ code to queue graphics on run time 
+        */   
     }
     
 }
