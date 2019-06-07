@@ -17,7 +17,7 @@ public class Vector {   // (uses composition)
         vec = new double[]{x,y,z};
     }
     Vector(){
-        vec = new double[]{0,0,0};
+        vec = new double[]{1,0,0};
     }
     
     public double[] get(){
