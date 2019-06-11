@@ -1,3 +1,10 @@
+/*
+    Matt, Aisik, Michelle, Liam
+    2019-06-11
+    This is rocket object class
+ */
+
+
 package relativemotion;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -24,7 +31,7 @@ public class Rocket extends Physics {
     int forceOfEngine = 0;
 
     Rocket(double x, double y, double z, double spdx, double spdy, 
-         double spdz, double ms) throws FileNotFoundException{   // default (instantiated on run-time)
+        double spdz, double ms) throws FileNotFoundException{   // default (instantiated on run-time)
         super(x,y,z,spdx,spdy,spdz,ms);  
         firing = false;
         angle = new double[]{0,0,0}; //x rot = "pitch", yrot = "yaw", zrot = "spin" in that order
@@ -45,19 +52,23 @@ public class Rocket extends Physics {
             else if("pitch".equals(com[0])){
                 pitch(Double.parseDouble(com[1]));
             }
-            else if("fire".equals(com[0])){  // split's each value into x,y,z cpnt's
-//                String [] fireComponent = com[1].split(",");
-//                
-//                fire(Double.parseDouble(fireComponent[0]),Double.parseDouble(fireComponent[1])
-//                        ,Double.parseDouble(fireComponent[2]));  // direction vector
+            else if("fire".equals(com[0])){  
+                fire();
+                
+                
+                /*     alternate
+                       String [] fireComponent = com[1].split(",");
+                       fire(Double.parseDouble(fireComponent[0]),Double.parseDouble(fireComponent[1])
+                       ,Double.parseDouble(fireComponent[2]));  // direction vector
+                */
             }
             else if("contine".equals(com[0])){
-                cont(Double.parseDouble(com[1]));
+                cont();
             }
             else if("cut".equals(com[1])){
                 cut();
             }
-        
+  
         }
     }
 
@@ -77,33 +88,43 @@ public class Rocket extends Physics {
     }
     
 
-    private void fire (){  // uses euler angles
+    private void fire (){  
         double engineAccel = 200/this.getMass();
         Vector vec = new Vector(direction.x()*engineAccel,direction.y()*engineAccel, direction.z()*engineAccel);
         forces[0] = vec;
     }
+    
     /*  alternative
     private void fire(double x, double y, double z) { // adding rocket force
         firing = true;
         forceOfEngine =30;
         // gets dimensional components of applied force vector
-       
-        
+      
         Vector vec = new Vector(x,y,z); // declares new vector
         forces[0] = vec; // adds Vector vec to slot 1 of Vector array (in Physics class)
     }
     */
-    private void cont(double turns) { // continue on  
-       forceOfEngine += 0;
-       yaw(0);  // stays in place (y -direction)
-       pitch(0); // stays in place (x -direction)
-       for(int i = 0; i < turns; i++) {
-           cont(i);
-       }
+    private void cont() { // continue on for (turns) seconds 
+     
+//       forceOfEngine += 0;
+//       yaw(0);  // stays in place (y -direction)
+//       pitch(0); // stays in place (x -direction)
+//       for(int i = 0; i < turns; i++) {
+//           cont(i);      
+//       }
     }
 
     private void cut() {
-        
+        forces[0] = null;
+    }
+    
+    @Override
+    public void go(){
+        spacialPositions[0] += velocity.x();  // adds the velocity to the position
+        spacialPositions[1] += velocity.y();
+        spacialPositions[2] += velocity.z();
+        excecuteCommand();
+        useTheForce();  
     }
 
 }

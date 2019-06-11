@@ -1,13 +1,13 @@
 /*
     Matt, Aisik, Michelle, Liam
-    2019-06-07
+    2019-06-11
     This is the template for the physics object (engine)
  */
 package relativemotion;
 
 /**
  *
- * @author malud0519
+ * @author lidea9928, malud0519
  */
 public class Physics {
     double [] spacialPositions = new double [3]; 
@@ -28,26 +28,43 @@ public class Physics {
     /**
      * 
      * @param ms 
-     * the value of the object's mass (kilograms)
+     * sets the value of the object's mass (kilograms)
      */
     public void setMass(double ms) { 
         mass = ms;
     }
     
+    /**
+     * 
+     * @return mass
+     */
     public double getMass() {
         return mass;
     }
     
     // position getters
     
+    /**
+     * 
+     * @return spacialPositions[0]
+     * x-coordinate of rocket's position
+     */
     public double getX() {
         return spacialPositions[0];
     }
-    
+    /**
+     * 
+     * @return spacialPositions[1]
+     * y-coordinate of rocket's position
+     */
     public double getY() {
         return spacialPositions[1];
     }
-    
+    /**
+     * 
+     * @return spacialPositions[2]
+     * z-coordinate of rocket's position
+     */
     public double getZ() {
         return spacialPositions[2];
     }
