@@ -1,6 +1,6 @@
 /*
     Matt, Aisik, Michelle, Liam
-    2019-06-11
+    2019-06-12
     This is rocket object class
  */
 
@@ -40,10 +40,17 @@ public class Rocket extends Physics {
 
     public String readCommand(){
         Scanner sc = new Scanner(commandsIn);
-        return sc.nextLine();
+        String line = "";  // edits -(line 43 - 50)
+        if (sc.hasNextLine() ) {  
+            return sc.nextLine();
+        }
+        else {
+            sc.close();
+            return line; 
+        }                  // edits -(fixed no such element exception)                             
     }
     
-    public void excecuteCommand(){  // this method checks the commands from the text file
+    public void excecuteCommand(){  // this method excecutes the commands from the text file
         String[] com = readCommand().split(" ");
         if (com.length >0){
             if ("yaw".equals(com[0])){
@@ -62,10 +69,10 @@ public class Rocket extends Physics {
                        ,Double.parseDouble(fireComponent[2]));  // direction vector
                 */
             }
-            else if("contine".equals(com[0])){
+            else if("continue".equals(com[0])){
                 cont();
             }
-            else if("cut".equals(com[1])){
+            else if("cut".equals(com[0])){
                 cut();
             }
   
@@ -124,7 +131,7 @@ public class Rocket extends Physics {
         spacialPositions[1] += velocity.y();
         spacialPositions[2] += velocity.z();
         excecuteCommand();
-        useTheForce();  
+        useTheForce(); 
     }
 
 }
