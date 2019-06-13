@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+    Matt, Aisik, Michelle, Liam
+    2019-06-13
+    This is vector object class
  */
 
 package relativemotion;
@@ -12,7 +12,15 @@ package relativemotion;
  */
 public class Vector {   // (uses composition)
     double[] vec;
-    
+    /**
+     * 
+     * @param x
+     * x component of vector
+     * @param y
+     * y component of vector
+     * @param z 
+     * z component of vector
+     */
     Vector(double x,double y,double z){
         vec = new double[]{x,y,z};
     }

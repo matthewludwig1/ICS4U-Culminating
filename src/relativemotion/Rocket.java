@@ -1,6 +1,6 @@
 /*
     Matt, Aisik, Michelle, Liam
-    2019-06-12
+    2019-06-13
     This is rocket object class
  */
 
@@ -29,7 +29,16 @@ public class Rocket extends Physics {
     Vector direction = new Vector();
     double angle[];  
     int forceOfEngine = 0;
-
+    /**
+     * @param x
+     * @param y
+     * @param z
+     * @param spdx
+     * @param spdy
+     * @param spdz
+     * @param ms
+     * @throws FileNotFoundException 
+     */
     Rocket(double x, double y, double z, double spdx, double spdy, 
         double spdz, double ms) throws FileNotFoundException{   // default (instantiated on run-time)
         super(x,y,z,spdx,spdy,spdz,ms);  
@@ -40,14 +49,13 @@ public class Rocket extends Physics {
 
     public String readCommand(){
         Scanner sc = new Scanner(commandsIn);
-        String line = "";  // edits -(line 43 - 50)
-        if (sc.hasNextLine() ) {  
+        
+        if (sc.hasNextLine()) {  
             return sc.nextLine();
         }
-        else {
-            sc.close();
-            return line; 
-        }                  // edits -(fixed no such element exception)                             
+       else{
+            return "continue";
+        }                                                           
     }
     
     public void excecuteCommand(){  // this method excecutes the commands from the text file
@@ -61,8 +69,7 @@ public class Rocket extends Physics {
             }
             else if("fire".equals(com[0])){  
                 fire();
-                
-                
+         
                 /*     alternate
                        String [] fireComponent = com[1].split(",");
                        fire(Double.parseDouble(fireComponent[0]),Double.parseDouble(fireComponent[1])
@@ -70,7 +77,9 @@ public class Rocket extends Physics {
                 */
             }
             else if("continue".equals(com[0])){
-                cont();
+                while (firing == true) {
+                    cont();
+                }
             }
             else if("cut".equals(com[0])){
                 cut();
@@ -111,8 +120,7 @@ public class Rocket extends Physics {
         forces[0] = vec; // adds Vector vec to slot 1 of Vector array (in Physics class)
     }
     */
-    private void cont() { // continue on for (turns) seconds 
-     
+    private void cont() { 
 //       forceOfEngine += 0;
 //       yaw(0);  // stays in place (y -direction)
 //       pitch(0); // stays in place (x -direction)
@@ -122,6 +130,7 @@ public class Rocket extends Physics {
     }
 
     private void cut() {
+        firing = false;
         forces[0] = null;
     }
     
