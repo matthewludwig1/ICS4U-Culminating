@@ -13,12 +13,6 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  *
  * @author lidea9928, malud0519
@@ -73,7 +67,7 @@ public class Rocket extends Physics {
                 /*     alternate
                        String [] fireComponent = com[1].split(",");
                        fire(Double.parseDouble(fireComponent[0]),Double.parseDouble(fireComponent[1])
-                       ,Double.parseDouble(fireComponent[2]));  // direction vector
+                       ,Double.parseDouble(fireComponent[2])); 
                 */
             }
             else if("continue".equals(com[0])){
@@ -121,12 +115,14 @@ public class Rocket extends Physics {
     }
     */
     private void cont() { 
-//       forceOfEngine += 0;
-//       yaw(0);  // stays in place (y -direction)
-//       pitch(0); // stays in place (x -direction)
-//       for(int i = 0; i < turns; i++) {
-//           cont(i);      
-//       }
+/*       
+         Alt:
+         forceOfEngine += 0;
+         yaw(0);  // stays in place (y -direction)
+         pitch(0); // stays in place (x -direction)
+         for(int i = 0; i < turns; i++) {
+            cont(i);      
+*/       }
     }
 
     private void cut() {
