@@ -1,6 +1,6 @@
 /*
     Matt, Aisik, Michelle, Liam
-    2019-06-13
+    2019-06-11
     This is rocket object class
  */
 
@@ -13,6 +13,12 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 /**
  *
  * @author lidea9928, malud0519
@@ -23,16 +29,7 @@ public class Rocket extends Physics {
     Vector direction = new Vector();
     double angle[];  
     int forceOfEngine = 0;
-    /**
-     * @param x
-     * @param y
-     * @param z
-     * @param spdx
-     * @param spdy
-     * @param spdz
-     * @param ms
-     * @throws FileNotFoundException 
-     */
+
     Rocket(double x, double y, double z, double spdx, double spdy, 
         double spdz, double ms) throws FileNotFoundException{   // default (instantiated on run-time)
         super(x,y,z,spdx,spdy,spdz,ms);  
@@ -43,16 +40,15 @@ public class Rocket extends Physics {
 
     public String readCommand(){
         Scanner sc = new Scanner(commandsIn);
-        
-        if (sc.hasNextLine()) {  
-            return sc.nextLine();
+        if(sc.hasNextLine()){
+        return sc.nextLine();
         }
-       else{
+        else{
             return "continue";
-        }                                                           
+        }
     }
     
-    public void excecuteCommand(){  // this method excecutes the commands from the text file
+    public void excecuteCommand(){  // this method checks the commands from the text file
         String[] com = readCommand().split(" ");
         if (com.length >0){
             if ("yaw".equals(com[0])){
@@ -63,17 +59,16 @@ public class Rocket extends Physics {
             }
             else if("fire".equals(com[0])){  
                 fire();
-         
+                
+                
                 /*     alternate
                        String [] fireComponent = com[1].split(",");
                        fire(Double.parseDouble(fireComponent[0]),Double.parseDouble(fireComponent[1])
-                       ,Double.parseDouble(fireComponent[2])); 
+                       ,Double.parseDouble(fireComponent[2]));  // direction vector
                 */
             }
-            else if("continue".equals(com[0])){
-                while (firing == true) {
-                    cont();
-                }
+            else if("contine".equals(com[0])){
+                cont();
             }
             else if("cut".equals(com[0])){
                 cut();
@@ -99,7 +94,7 @@ public class Rocket extends Physics {
     
 
     private void fire (){  
-        double engineAccel = 200/this.getMass();
+        double engineAccel = 1000/this.getMass();
         Vector vec = new Vector(direction.x()*engineAccel,direction.y()*engineAccel, direction.z()*engineAccel);
         forces[0] = vec;
     }
@@ -114,19 +109,17 @@ public class Rocket extends Physics {
         forces[0] = vec; // adds Vector vec to slot 1 of Vector array (in Physics class)
     }
     */
-    private void cont() { 
-/*       
-         Alt:
-         forceOfEngine += 0;
-         yaw(0);  // stays in place (y -direction)
-         pitch(0); // stays in place (x -direction)
-         for(int i = 0; i < turns; i++) {
-            cont(i);      
-*/       }
+    private void cont() { // continue on for (turns) seconds 
+     
+//       forceOfEngine += 0;
+//       yaw(0);  // stays in place (y -direction)
+//       pitch(0); // stays in place (x -direction)
+//       for(int i = 0; i < turns; i++) {
+//           cont(i);      
+//       }
     }
 
     private void cut() {
-        firing = false;
         forces[0] = null;
     }
     
@@ -136,7 +129,7 @@ public class Rocket extends Physics {
         spacialPositions[1] += velocity.y();
         spacialPositions[2] += velocity.z();
         excecuteCommand();
-        useTheForce(); 
+        useTheForce();  
     }
 
 }
